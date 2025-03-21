@@ -1,6 +1,6 @@
 class Defs:
 
-    ###Demo change
+    ###Test
 
     #########Global parameters########
     #General settings
