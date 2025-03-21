@@ -1,6 +1,6 @@
 class Defs:
 
-    ###Test push
+    ###Demo push
 
     #########Global parameters########
     #General settings
