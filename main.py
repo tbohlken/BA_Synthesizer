@@ -34,7 +34,7 @@ for n in range(Defs.synth_count):
 
     object_manager.generate_diamonds()
 
-    object_manager.generate_rectangles()
+    #object_manager.generate_rectangles()
 
     object_manager.generate_section_bbox()
 
