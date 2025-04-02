@@ -1,5 +1,6 @@
 from PIL import Image, ImageDraw
 import os
+import random
 
 def load_diamond_data(file_path):
     """Reads diamond coordinates from a text file and returns them as a list of tuples."""
@@ -13,6 +14,39 @@ def load_diamond_data(file_path):
                 diamonds.append((class_id, x_rel, y_rel, w_rel, h_rel))
     return diamonds
 
+class Rivet:
+    def __init__(self, symbol_folder="resources/rivet_symbols", rows=2, cols=3, spacing=10):
+        self.symbol_folder = symbol_folder
+        self.rows = rows
+        self.cols = cols
+        self.spacing = spacing
+
+        # Get all PNG files in the symbol folder
+        symbol_paths = [os.path.join(self.symbol_folder, f) for f in os.listdir(self.symbol_folder) if f.lower().endswith(".png")]
+        if not symbol_paths:
+            raise ValueError("No rivet symbols found in the specified folder.")
+
+        # Load one symbol to determine size
+        sample_symbol = Image.open(symbol_paths[0]).convert("RGBA")
+        symbol_width, symbol_height = sample_symbol.size
+
+        # Create the final image canvas
+        canvas_width = self.cols * symbol_width + (self.cols - 1) * self.spacing
+        canvas_height = self.rows * symbol_height + (self.rows - 1) * self.spacing
+        self.image = Image.new("RGBA", (canvas_width, canvas_height), (255, 255, 255, 0))
+
+        # Paste symbols into grid
+        for row in range(self.rows):
+            for col in range(self.cols):
+                symbol_path = random.choice(symbol_paths)
+                symbol = Image.open(symbol_path).convert("RGBA")
+                x = col * (symbol_width + self.spacing)
+                y = row * (symbol_height + self.spacing)
+                self.image.paste(symbol, (x, y), symbol)
+
+    def get_image(self):
+        """Returns the generated rivet grid image."""
+        return self.image
 
 def visualize_first_file():
     cwd = os.getcwd()

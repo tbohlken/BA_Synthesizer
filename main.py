@@ -30,26 +30,25 @@ for n in range(Defs.synth_count):
 
     scale_factor = Defs.target_width / Defs.width
 
-
-
-    object_manager.generate_diamonds()
-
-    #object_manager.generate_rectangles()
+    """ED background elements"""
+    # object_manager.generate_rectangles()
     object_manager.generate_cadviews()
 
-
-
-    object_manager.generate_section_bbox()
-
+    """Other confusing elements"""
     object_manager.generate_arrows()
 
-    object_manager.generate_circles()
 
-    # Insert classes onto base
+    """Detectable classes"""
+    object_manager.generate_diamonds()
+    object_manager.generate_section_bbox()
+    object_manager.generate_circles()
+    object_manager.generate_rivet_groups()
+
+    """Insert classes onto base"""
     base_img.insert_onto_base(*object_manager.get_objects())
 
 
-    # Show and save final image
+    """Save synth ED"""
     base_img.save(Defs.dataset_name + "/images/" + fileName + ".png")
 
 

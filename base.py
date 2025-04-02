@@ -9,6 +9,7 @@ from rectangle import Rectangle
 from arrow import Arrow
 from defs import Defs
 from circle import Circle
+from rivet_group import RivetGroup
 from section_bbox import Section_Bbox
 
 
@@ -25,7 +26,13 @@ class Base:
         # self.height = height
         # self.image = Image.new("RGBA", (self.width, self.height), (255, 255, 255, 255))
 
-    def insert_onto_base(self, diamond_objects: [DiamondGroup], rectangle_objects: [Rectangle], circle_objects: [Circle],arrow_objects: [Arrow], section_bbox_objects: [Section_Bbox], cadview_objects: [CadView]):
+    def insert_onto_base(self, diamond_objects: [DiamondGroup],
+                         rectangle_objects: [Rectangle],
+                         circle_objects: [Circle],
+                         arrow_objects: [Arrow],
+                         section_bbox_objects: [Section_Bbox],
+                         cadview_objects: [CadView],
+                         rg_objects: [RivetGroup]):
 
         for rectangle_object in rectangle_objects:
             self.image.paste(rectangle_object.get_image(), rectangle_object.randomPosition, rectangle_object.get_image())
@@ -39,6 +46,9 @@ class Base:
 
         for diamond_object in diamond_objects:
             self.image.paste(diamond_object.get_image(), diamond_object.randomPosition, diamond_object.get_image())
+
+        for rg_object in rg_objects:
+            self.image.paste(rg_object.get_image(), rg_object.randomPosition, rg_object.get_image())
 
         for section_bbox_object in section_bbox_objects:
             self.image.paste(section_bbox_object.get_image(), section_bbox_object.randomPosition, section_bbox_object.get_image())

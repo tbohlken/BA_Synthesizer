@@ -1,5 +1,6 @@
 from random import randint
 from coordinate_tracker import CoordinateTracker
+from rivet_group import RivetGroup
 from utils import Utils
 from diamond import Diamond
 from rectangle import Rectangle
@@ -21,10 +22,11 @@ class ObjectManager:
         self.arrow_list = []
         self.section_bbox_list = []
         self.cadview_list = []
+        self.rg_list = []
 
         self.fileName = fileName  # Save file name for use in label output
 
-        self.tracker =  CoordinateTracker()
+        self.tracker =  CoordinateTracker() #Tracker for detectable objects
 
         self.diamond_tracker = self.tracker
         self.circle_tracker = self.tracker
@@ -46,6 +48,13 @@ class ObjectManager:
                           "a") as file:  # Append mode, file is created if missing
                     file.write(
                         f"0 {diamond_obj.randomXFraction} {diamond_obj.randomYFraction} {diamond_obj.relativeWidth} {diamond_obj.relativeHeight}\n")
+
+
+
+    def generate_rivet_groups(self):
+        for i in range(randint(Defs.min_rg_count, Defs.max_rg_count)):
+            rg_object = RivetGroup(self.tracker)
+            self.rg_list.append(rg_object)
 
 
 
@@ -95,4 +104,4 @@ class ObjectManager:
 
     def get_objects(self):
 
-        return self.diamond_list, self.rectangle_list, self.circle_list, self.arrow_list, self.section_bbox_list, self.cadview_list
+        return self.diamond_list, self.rectangle_list, self.circle_list, self.arrow_list, self.section_bbox_list, self.cadview_list, self.rg_list
