@@ -4,7 +4,7 @@ class Defs:
 
     #########Global parameters########
     #General settings
-    synth_count = 5
+    synth_count = 1
     width = 4963 #Drawing width
     height = 3509 #Drawing height
     classes = ["Diamond"]

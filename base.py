@@ -2,12 +2,15 @@ import os
 import random
 from PIL import Image, ImageDraw, ImageFont
 from pdf2image import convert_from_path
-from diamond import Diamond
+
+from cadview import CadView
+from diamond_group import DiamondGroup
 from rectangle import Rectangle
 from arrow import Arrow
 from defs import Defs
 from circle import Circle
 from section_bbox import Section_Bbox
+
 
 class Base:
     def __init__(self, width=Defs.width, height=Defs.height):
@@ -22,12 +25,14 @@ class Base:
         # self.height = height
         # self.image = Image.new("RGBA", (self.width, self.height), (255, 255, 255, 255))
 
-    def insert_onto_base(self, diamond_objects: [Diamond], rectangle_objects: [Rectangle], circle_objects: [Circle],arrow_objects: [Arrow], section_bbox_objects: [Section_Bbox]):
-
-        self.paste_scaled_png()
+    def insert_onto_base(self, diamond_objects: [DiamondGroup], rectangle_objects: [Rectangle], circle_objects: [Circle],arrow_objects: [Arrow], section_bbox_objects: [Section_Bbox], cadview_objects: [CadView]):
 
         for rectangle_object in rectangle_objects:
             self.image.paste(rectangle_object.get_image(), rectangle_object.randomPosition, rectangle_object.get_image())
+
+        for cadview_object in cadview_objects:
+            self.image.paste(cadview_object.get_image(), cadview_object.randomPosition,
+                             cadview_object.get_image())
 
         for arrow_object in arrow_objects:
             self.image.paste(arrow_object.get_image(), arrow_object.randomPosition, arrow_object.get_image())
@@ -43,41 +48,7 @@ class Base:
 
 
 
-    def get_random_path(self, folder_path:str):
 
-        png_files = [f for f in os.listdir(folder_path) if f.lower().endswith('.png')]
-        # Choose one at random
-        if png_files:
-            return os.path.join(folder_path, random.choice(png_files))
-        else:
-            raise FileNotFoundError("No PNG files found in the folder.")
-
-    def paste_scaled_png(self):
-        """
-        Pastes a PNG onto the base image with optional scaling.
-
-        :param png_path: Path to the PNG file
-        :param position: (x, y) position on the base image
-        :param scale: Scale factor (e.g., 0.5 for half size, 2.0 for double size)
-        """
-
-
-        png_path = self.get_random_path(folder_path= os.getcwd() + "/resources/cad_views/")
-
-        position = (500, 200)
-        scale = 3
-
-
-        # Load PNG and convert to RGBA
-        overlay = Image.open(png_path).convert("RGBA")
-
-        # Scale PNG if needed
-        if scale != 1.0:
-            new_size = (int(overlay.width * scale), int(overlay.height * scale))
-            overlay = overlay.resize(new_size, Image.Resampling.LANCZOS)
-
-        # Paste using the alpha channel as mask
-        self.image.paste(overlay, position, overlay)
 
     def show(self):
         """Displays the final large image."""

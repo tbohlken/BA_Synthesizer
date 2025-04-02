@@ -5,22 +5,37 @@ from coordinate_tracker import CoordinateTracker
 from PIL import Image, ImageDraw, ImageFont
 
 class Diamond:
-    def __init__(self, width, height, randX, randY,tracker: CoordinateTracker):
+    def __init__(self):
         """Initialize a small 500x500 image with a diamond shape and centered text."""
+        width = randint(Defs.min_diamond_width, Defs.max_diamond_width)
+        width = 120
+        height = int(width * 2 / 3)
+
+
+
+
+
 
         self.width = width
         self.height = height
-
-        self.randX = randX
-        self.randY = randY
-
         self.relativeWidth = self.width / Defs.width
         self.relativeHeight = self.height / Defs.height
 
-        self.randomXFraction = (self.randX + 0.5*self.width) / Defs.width #Center x fraction
-        self.randomYFraction = (self.randY + 0.5*self.height) / Defs.height #Center y fraction
+        #Position vars
+        self.randomPosition = (0, 0)
+        self.randomXFraction = 0.0
+        self.randomYFraction = 0.0
+
+        '''
+        = (self.randX + 0.5*self.width) / Defs.width #Center x fraction
+        = (self.randY + 0.5*self.height) / Defs.height #Center y fraction
 
         self.randomPosition = (self.randX, self.randY)
+        
+        '''
+
+
+
 
         self.image = Image.new("RGBA", (self.width, self.height), (255, 255, 255, 0))
         self.draw = ImageDraw.Draw(self.image)
@@ -29,6 +44,15 @@ class Diamond:
 
 
 
+
+
+    def setPosition(self, arrangementPos, xOffset, yOffset):
+
+
+
+        self.randomPosition = (arrangementPos[0] + xOffset, arrangementPos[1] + yOffset)
+        self.randomXFraction = (self.randomPosition[0]+ 0.5*self.width) / Defs.width #Center x fraction
+        self.randomYFraction = (self.randomPosition[1] + 0.5*self.height) / Defs.height
 
 
     def _draw_diamond(self):

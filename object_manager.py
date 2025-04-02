@@ -1,12 +1,15 @@
 from random import randint
 from coordinate_tracker import CoordinateTracker
+from utils import Utils
 from diamond import Diamond
 from rectangle import Rectangle
 from arrow import Arrow
 from defs import Defs
 from circle import Circle
 from section_bbox import Section_Bbox
-from utils import Utils
+from cadview import CadView
+from diamond_group import DiamondGroup
+
 
 
 class ObjectManager:
@@ -17,6 +20,7 @@ class ObjectManager:
         self.rectangle_list = []
         self.arrow_list = []
         self.section_bbox_list = []
+        self.cadview_list = []
 
         self.fileName = fileName  # Save file name for use in label output
 
@@ -30,36 +34,18 @@ class ObjectManager:
 
 
     def generate_diamonds(self):
+
+
+
         # Generate diamonds
         for i in range(randint(Defs.min_diamond_count, Defs.max_diamond_count)):
-
-
-
-
-            width = randint(Defs.min_diamond_width, Defs.max_diamond_width)
-            height = int(width * 2 / 3)
-
-
-
-            randX, randY = Utils.generate_rand_allowed_xyPos(width, height)
-
-
-            while True:
-                if self.diamond_tracker.is_overlapping(randX, randY, width, height):
-                    randX, randY = Utils.generate_rand_allowed_xyPos(width, height)
-                else:
-                    break
-
-
-
-            diamond_obj = Diamond(width, height, randX, randY, self.tracker)
-            self.diamond_list.append(diamond_obj)
-
-            with open(Defs.dataset_name + "/labels/" + self.fileName + ".txt",
-                      "a") as file:  # Append mode, file is created if missing
-                file.write(
-                    f"0 {diamond_obj.randomXFraction} {diamond_obj.randomYFraction} {diamond_obj.relativeWidth} {diamond_obj.relativeHeight}\n")
-
+            group = DiamondGroup(tracker=self.tracker, num_diamonds=randint(1, 4))
+            self.diamond_list.append(group)
+            for diamond_obj in group.diamonds:
+                with open(Defs.dataset_name + "/labels/" + self.fileName + ".txt",
+                          "a") as file:  # Append mode, file is created if missing
+                    file.write(
+                        f"0 {diamond_obj.randomXFraction} {diamond_obj.randomYFraction} {diamond_obj.relativeWidth} {diamond_obj.relativeHeight}\n")
 
 
 
@@ -69,6 +55,15 @@ class ObjectManager:
         for i in range(randint(Defs.min_rectangle_count, Defs.max_rectangle_count)):
             rectangle_obj = Rectangle(self.rectangle_tracker)
             self.rectangle_list.append(rectangle_obj)
+
+    def generate_cadviews(self):
+        # Generate rectangles
+        for i in range(3): #Three views (emulating front view, top, and left)
+
+            cadview_obj = CadView(pos = i)
+
+            self.cadview_list.append(cadview_obj)
+
 
     def generate_arrows(self):
         # Generate arrows
@@ -100,4 +95,4 @@ class ObjectManager:
 
     def get_objects(self):
 
-        return self.diamond_list, self.rectangle_list, self.circle_list, self.arrow_list, self.section_bbox_list
+        return self.diamond_list, self.rectangle_list, self.circle_list, self.arrow_list, self.section_bbox_list, self.cadview_list
