@@ -11,11 +11,6 @@ class Diamond:
         width = 120
         height = int(width * 2 / 3)
 
-
-
-
-
-
         self.width = width
         self.height = height
         self.relativeWidth = self.width / Defs.width
@@ -23,19 +18,8 @@ class Diamond:
 
         #Position vars
         self.randomPosition = (0, 0)
-        self.randomXFraction = 0.0
-        self.randomYFraction = 0.0
-
-        '''
-        = (self.randX + 0.5*self.width) / Defs.width #Center x fraction
-        = (self.randY + 0.5*self.height) / Defs.height #Center y fraction
-
-        self.randomPosition = (self.randX, self.randY)
-        
-        '''
-
-
-
+        self.randomXFraction = 0.0 #Initialize x fraction
+        self.randomYFraction = 0.0 #Initialize y fraction
 
         self.image = Image.new("RGBA", (self.width, self.height), (255, 255, 255, 0))
         self.draw = ImageDraw.Draw(self.image)

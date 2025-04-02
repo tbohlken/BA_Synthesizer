@@ -37,8 +37,6 @@ class ObjectManager:
 
     def generate_diamonds(self):
 
-
-
         # Generate diamonds
         for i in range(randint(Defs.min_diamond_count, Defs.max_diamond_count)):
             group = DiamondGroup(tracker=self.tracker, num_diamonds=randint(1, 4))
@@ -55,9 +53,11 @@ class ObjectManager:
         for i in range(randint(Defs.min_rg_count, Defs.max_rg_count)):
             rg_object = RivetGroup(self.tracker)
             self.rg_list.append(rg_object)
-
-
-
+            for rivet_object in rg_object.rivets:
+                with open(Defs.dataset_name + "/labels/" + self.fileName + ".txt",
+                          "a") as file:  # Append mode, file is created if missing
+                    file.write(
+                        f"2 {rivet_object.xFraction} {rivet_object.yFraction} {rivet_object.relativeWidth} {rivet_object.relativeHeight}\n")
 
     def generate_rectangles(self):
         # Generate rectangles
@@ -89,7 +89,7 @@ class ObjectManager:
             with open(Defs.dataset_name + "/labels/" + self.fileName + ".txt",
                       "a") as file:  # Append mode, file is created if missing
                 file.write(
-                    f"2 {section_bbox_obj.randomXFraction} {section_bbox_obj.randomYFraction} {section_bbox_obj.relativeWidth} {section_bbox_obj.relativeHeight}\n")
+                    f"3 {section_bbox_obj.randomXFraction} {section_bbox_obj.randomYFraction} {section_bbox_obj.relativeWidth} {section_bbox_obj.relativeHeight}\n")
 
     def generate_circles(self):
         # Generate circles

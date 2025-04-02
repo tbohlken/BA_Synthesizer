@@ -76,7 +76,8 @@ def visualize_first_file():
     class_colors = {
         0: "red",
         1: "cyan",
-        2: "green"
+        2: "green",
+        3: "yellow"
         # Add more class IDs and colors as needed
     }
 

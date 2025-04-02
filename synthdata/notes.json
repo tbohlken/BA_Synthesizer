@@ -2,7 +2,19 @@
     "categories": [
         {
             "id": 0,
-            "name": "Diamond"
+            "name": "FlagNoteSymbol"
+        },
+        {
+            "id": 1,
+            "name": "PartNumber"
+        },
+        {
+            "id": 2,
+            "name": "Rivet"
+        },
+        {
+            "id": 3,
+            "name": "SectionText"
         }
     ],
     "info": {

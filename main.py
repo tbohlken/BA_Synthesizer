@@ -40,9 +40,9 @@ for n in range(Defs.synth_count):
 
     """Detectable classes"""
     object_manager.generate_diamonds()
-    object_manager.generate_section_bbox()
     object_manager.generate_circles()
     object_manager.generate_rivet_groups()
+    object_manager.generate_section_bbox()
 
     """Insert classes onto base"""
     base_img.insert_onto_base(*object_manager.get_objects())

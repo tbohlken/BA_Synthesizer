@@ -4,10 +4,10 @@ class Defs:
 
     #########Global parameters########
     #General settings
-    synth_count = 1
+    synth_count = 10
     width = 4963 #Drawing width
     height = 3509 #Drawing height
-    classes = ["Diamond"]
+    classes = ["FlagNoteSymbol", "PartNumber", "Rivet", "SectionText"]
     target_width = 2000
 
 
@@ -36,7 +36,7 @@ class Defs:
     min_diamond_count, max_diamond_count = 25, 25  # Min and max amount of diamonds
 
     #Rivet groups
-    rg_scale = 0.13
+    min_rg_scale, max_rg_scale = 0.12, 0.2
     min_rg_count, max_rg_count = 3, 8
     min_rg_rows, max_rg_rows = 2, 5
     min_rg_columns, max_rg_columns = 2, 5

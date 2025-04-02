@@ -1,1 +1,4 @@
-Diamond
+FlagNoteSymbol
+PartNumber
+Rivet
+SectionText
