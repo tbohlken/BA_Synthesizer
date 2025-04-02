@@ -1,6 +1,7 @@
 from diamond import Diamond
 from PIL import Image
 from utils import Utils
+from defs import Defs
 import random
 
 
@@ -18,10 +19,10 @@ class DiamondGroup:
             """
         self.diamonds = []
         self.image = None
-
+        self.scale = round(random.uniform(Defs.min_diamond_scale_factor, Defs.max_diamond_scale_factor), 2)
         # Create and store diamonds
         for i in range(num_diamonds):
-            diamond = Diamond()
+            diamond = Diamond(self.scale)
             self.diamonds.append(diamond)
 
         # Determine max image size

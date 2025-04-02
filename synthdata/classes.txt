@@ -2,3 +2,4 @@ FlagNoteSymbol
 PartNumber
 Rivet
 SectionText
+Cross

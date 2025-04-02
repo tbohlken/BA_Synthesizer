@@ -11,6 +11,7 @@ from defs import Defs
 from circle import Circle
 from rivet_group import RivetGroup
 from section_bbox import Section_Bbox
+from cross import Cross
 
 
 class Base:
@@ -32,20 +33,28 @@ class Base:
                          arrow_objects: [Arrow],
                          section_bbox_objects: [Section_Bbox],
                          cadview_objects: [CadView],
-                         rg_objects: [RivetGroup]):
+                         rg_objects: [RivetGroup],
+                         cross_objects: [Cross]):
 
-        for rectangle_object in rectangle_objects:
-            self.image.paste(rectangle_object.get_image(), rectangle_object.randomPosition, rectangle_object.get_image())
 
+        """Background elements"""
         for cadview_object in cadview_objects:
             self.image.paste(cadview_object.get_image(), cadview_object.randomPosition,
                              cadview_object.get_image())
 
+        for rectangle_object in rectangle_objects:
+            self.image.paste(rectangle_object.get_image(), rectangle_object.randomPosition, rectangle_object.get_image())
+
+        '''Confusing elements'''
         for arrow_object in arrow_objects:
             self.image.paste(arrow_object.get_image(), arrow_object.randomPosition, arrow_object.get_image())
 
+        '''Detectable objects'''
         for diamond_object in diamond_objects:
             self.image.paste(diamond_object.get_image(), diamond_object.randomPosition, diamond_object.get_image())
+
+        for circle_object in circle_objects:
+            self.image.paste(circle_object.get_image(), circle_object.randomPosition, circle_object.get_image())
 
         for rg_object in rg_objects:
             self.image.paste(rg_object.get_image(), rg_object.randomPosition, rg_object.get_image())
@@ -53,8 +62,9 @@ class Base:
         for section_bbox_object in section_bbox_objects:
             self.image.paste(section_bbox_object.get_image(), section_bbox_object.randomPosition, section_bbox_object.get_image())
 
-        for circle_object in circle_objects:
-            self.image.paste(circle_object.get_image(), circle_object.randomPosition, circle_object.get_image())
+        for cross_object in cross_objects:
+            self.image.paste(cross_object.get_image(), cross_object.randomPosition, cross_object.get_image())
+
 
 
 

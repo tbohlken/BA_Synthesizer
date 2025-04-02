@@ -31,7 +31,7 @@ for n in range(Defs.synth_count):
     scale_factor = Defs.target_width / Defs.width
 
     """ED background elements"""
-    # object_manager.generate_rectangles()
+    object_manager.generate_rectangles()
     object_manager.generate_cadviews()
 
     """Other confusing elements"""
@@ -43,6 +43,7 @@ for n in range(Defs.synth_count):
     object_manager.generate_circles()
     object_manager.generate_rivet_groups()
     object_manager.generate_section_bbox()
+    object_manager.generate_crosses()
 
     """Insert classes onto base"""
     base_img.insert_onto_base(*object_manager.get_objects())

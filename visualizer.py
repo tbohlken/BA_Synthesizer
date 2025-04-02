@@ -74,10 +74,11 @@ def visualize_first_file():
     # Draw red bounding boxes
 
     class_colors = {
-        0: "red",
-        1: "cyan",
-        2: "green",
-        3: "yellow"
+        0: "red", #Flag note symbol
+        1: "cyan", #Partnumber
+        2: "green", #Rivet symbol
+        3: "yellow", #Section text
+        4: "blue" #Cross symbol
         # Add more class IDs and colors as needed
     }
 

@@ -10,6 +10,7 @@ from circle import Circle
 from section_bbox import Section_Bbox
 from cadview import CadView
 from diamond_group import DiamondGroup
+from cross import Cross
 
 
 
@@ -23,6 +24,7 @@ class ObjectManager:
         self.section_bbox_list = []
         self.cadview_list = []
         self.rg_list = []
+        self.cross_list = []
 
         self.fileName = fileName  # Save file name for use in label output
 
@@ -73,6 +75,16 @@ class ObjectManager:
 
             self.cadview_list.append(cadview_obj)
 
+    def generate_crosses(self):
+
+        for i in range(randint(Defs.min_cross_count, Defs.max_cross_count)):
+            cross_obj = Cross(self.tracker)
+            self.cross_list.append(cross_obj)
+
+            with open(Defs.dataset_name + "/labels/" + self.fileName + ".txt",
+                      "a") as file:  # Append mode, file is created if missing
+                file.write(
+                    f"4 {cross_obj.xFraction} {cross_obj.yFraction} {cross_obj.relativeWidth} {cross_obj.relativeHeight}\n")
 
     def generate_arrows(self):
         # Generate arrows
@@ -104,4 +116,4 @@ class ObjectManager:
 
     def get_objects(self):
 
-        return self.diamond_list, self.rectangle_list, self.circle_list, self.arrow_list, self.section_bbox_list, self.cadview_list, self.rg_list
+        return self.diamond_list, self.rectangle_list, self.circle_list, self.arrow_list, self.section_bbox_list, self.cadview_list, self.rg_list, self.cross_list

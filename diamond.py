@@ -5,10 +5,10 @@ from coordinate_tracker import CoordinateTracker
 from PIL import Image, ImageDraw, ImageFont
 
 class Diamond:
-    def __init__(self):
+    def __init__(self, scale: float):
         """Initialize a small 500x500 image with a diamond shape and centered text."""
-        width = randint(Defs.min_diamond_width, Defs.max_diamond_width)
-        width = 120
+
+        width = int(120 * scale)
         height = int(width * 2 / 3)
 
         self.width = width

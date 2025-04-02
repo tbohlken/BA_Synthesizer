@@ -28,7 +28,7 @@ class CadView:
         # Paste the scaled PNG onto this image
         self.image.paste(overlay, (0, 0), overlay)
 
-        horizontalPadding = 100
+        horizontalPadding = 200
         verticalPadding = 400
         if pos == 1:
             self.randomPosition = (Defs.margin_left + horizontalPadding, Defs.margin_top + verticalPadding)
